@@ -48,7 +48,15 @@ class ArticleRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     parser_classes = [MultiPartParser, FormParser]
 
     def perform_update(self, serializer):
-        serializer.save(author=self.request.user)
+        instance = serializer.save(author=self.request.user)
+        if "banner_image" in self.request.FILES:
+            if (
+                instance.banner_image
+                and instance.banner_image.name != "/profile_default.png"
+            ):
+                default_storage.delete(instance.banner_image.path)
+            instance.banner_image = self.request.FILES["banner_image"]
+            instance.save()
         
     def retrieve(self, request, *args, **kwargs):
         try:
