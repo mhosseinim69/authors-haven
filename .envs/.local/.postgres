@@ -3,3 +3,4 @@ POSTGRES_PORT=5432
 POSTGRES_DB=authors-live
 POSTGRES_USER=mostafa
 POSTGRES_PASSWORD=abc123
+DATABASE_URL=postgres://mostafa:abc123@postgres:5432/authors-live
