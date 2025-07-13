@@ -10,6 +10,7 @@ from .read_time_engine import ArticleReadTimeEngine
 
 User = get_user_model()
 
+
 class Clap(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey("Article", on_delete=models.CASCADE)
@@ -20,6 +21,7 @@ class Clap(TimeStampedModel):
 
     def __str__(self):
         return f"{self.user.first_name} clapped {self.article.title}"
+
 
 class Article(TimeStampedModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="articles")
@@ -43,7 +45,7 @@ class Article(TimeStampedModel):
 
     def view_count(self):
         return self.article_views.count()
-    
+
     def average_rating(self):
         ratings = self.ratings.all()
 
@@ -52,6 +54,7 @@ class Article(TimeStampedModel):
             average_rating = total_rating / ratings.count()
             return round(average_rating, 2)
         return None
+
 
 class ArticleView(TimeStampedModel):
     article = models.ForeignKey(

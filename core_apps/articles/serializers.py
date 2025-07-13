@@ -1,9 +1,11 @@
 from rest_framework import serializers
+
 from core_apps.articles.models import Article, ArticleView, Clap
-from core_apps.profiles.serializers import ProfileSerializer
 from core_apps.bookmarks.models import Bookmark
 from core_apps.bookmarks.serializers import BookmarkSerializer
+from core_apps.profiles.serializers import ProfileSerializer
 from core_apps.responses.serializers import ResponseSerializer
+
 
 class TagListField(serializers.Field):
     def to_representation(self, value):
@@ -115,11 +117,11 @@ class ArticleSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
 
+
 class ClapSerializer(serializers.ModelSerializer):
     article_title = serializers.CharField(source="article.title", read_only=True)
     user_first_name = serializers.CharField(source="user.first_name", read_only=True)
 
     class Meta:
         model = Clap
-        fields = ["id", "user_first_name", "article_title"]      
-
+        fields = ["id", "user_first_name", "article_title"]

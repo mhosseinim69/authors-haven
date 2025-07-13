@@ -3,7 +3,7 @@ from django.urls import path
 from .views import (
     ArticleListCreateView,
     ArticleRetrieveUpdateDestroyView,
-    ClapArticleView
+    ClapArticleView,
 )
 
 urlpatterns = [
